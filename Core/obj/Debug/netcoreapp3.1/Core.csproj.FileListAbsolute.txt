@@ -1,0 +1,9 @@
+D:\repos\ChallengeMasGlobalConsulting\ChallengeMasGlobalConsulting\Core\bin\Debug\netcoreapp3.1\Core.deps.json
+D:\repos\ChallengeMasGlobalConsulting\ChallengeMasGlobalConsulting\Core\bin\Debug\netcoreapp3.1\Core.dll
+D:\repos\ChallengeMasGlobalConsulting\ChallengeMasGlobalConsulting\Core\bin\Debug\netcoreapp3.1\Core.pdb
+D:\repos\ChallengeMasGlobalConsulting\ChallengeMasGlobalConsulting\Core\obj\Debug\netcoreapp3.1\Core.AssemblyInfoInputs.cache
+D:\repos\ChallengeMasGlobalConsulting\ChallengeMasGlobalConsulting\Core\obj\Debug\netcoreapp3.1\Core.AssemblyInfo.cs
+D:\repos\ChallengeMasGlobalConsulting\ChallengeMasGlobalConsulting\Core\obj\Debug\netcoreapp3.1\Core.csproj.CoreCompileInputs.cache
+D:\repos\ChallengeMasGlobalConsulting\ChallengeMasGlobalConsulting\Core\obj\Debug\netcoreapp3.1\Core.dll
+D:\repos\ChallengeMasGlobalConsulting\ChallengeMasGlobalConsulting\Core\obj\Debug\netcoreapp3.1\Core.pdb
+D:\repos\ChallengeMasGlobalConsulting\ChallengeMasGlobalConsulting\Core\obj\Debug\netcoreapp3.1\Core.csprojAssemblyReference.cache

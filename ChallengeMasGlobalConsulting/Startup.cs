@@ -1,3 +1,9 @@
+using ChallengeMasGlobalConsulting.Bll;
+using ChallengeMasGlobalConsulting.Bll.Contracts;
+using ChallengeMasGlobalConsulting.Bll.Employee;
+using ChallengeMasGlobalConsulting.Dal;
+using ChallengeMasGlobalConsulting.Dal.Contracts;
+using Core.Shared;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -7,9 +13,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace ChallengeMasGlobalConsulting
@@ -28,6 +36,14 @@ namespace ChallengeMasGlobalConsulting
         {
 
             services.AddControllers();
+            services.Configure<ApplicattionSettings>(Configuration.GetSection("ApplicattionSettings"));
+
+            services.AddTransient<IEmployeeBll, EmployeeBll>();
+            services.AddTransient<IEmployeeDal, EmployeeDal>();
+
+            services.AddTransient<HttpClient, HttpClient>();
+            services.AddTransient<IEmployeeFactory, EmployeeFactory>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ChallengeMasGlobalConsulting", Version = "v1" });
@@ -45,7 +61,7 @@ namespace ChallengeMasGlobalConsulting
             }
 
             app.UseHttpsRedirection();
-
+            app.UseSerilogRequestLogging();
             app.UseRouting();
 
             app.UseAuthorization();
