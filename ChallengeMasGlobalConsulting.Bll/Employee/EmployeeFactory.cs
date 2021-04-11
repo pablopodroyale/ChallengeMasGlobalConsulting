@@ -1,5 +1,6 @@
 ﻿using Core.Common.Enum;
 using Core.Dto.Response;
+using Core.Model.Employee;
 using System;
 using System.Collections.Generic;
 using System.Text;

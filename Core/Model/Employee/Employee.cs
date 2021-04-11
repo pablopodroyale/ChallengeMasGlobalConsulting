@@ -12,6 +12,7 @@ namespace Core.Model.Employee
         public Role.Role Role { get; set; }
         public double HourlySalary { get; set; }
         public double MonthlySalary { get; set; }
+        public double CalculatedAnnualSalary { get; set; }
 
         public Employee(EmployeeResponseDto employee)
         {
@@ -25,8 +26,10 @@ namespace Core.Model.Employee
                 RoleName = employee.roleName,
                 RoleDescription = employee.roleDescription
             };
+
+            SetCalculatedAnnualSalary();
         }
 
-        protected abstract double GetSalary();
+        protected abstract void SetCalculatedAnnualSalary();
     }
 }

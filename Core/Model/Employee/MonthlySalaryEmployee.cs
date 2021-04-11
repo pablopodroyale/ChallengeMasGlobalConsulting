@@ -12,9 +12,9 @@ namespace Core.Model.Employee
 
         }
 
-        protected override double GetSalary()
+        protected override void SetCalculatedAnnualSalary()
         {
-            throw new NotImplementedException();
+            this.CalculatedAnnualSalary = MonthlySalary * 12;
         }
     }
 }

@@ -57,7 +57,7 @@ namespace ChallengeMasGlobalConsulting.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ServiceResultDto<ICollection<Employee>>>> GetEmployeeById(int id)
+        public async Task<ActionResult<ServiceResultDto<Employee>>> GetEmployeeById(string id)
         {
             _log.Information("Calling Get GetEmployeeById Id:", id);
             ServiceResultDto<Employee> resultDto = new ServiceResultDto<Employee>();
@@ -65,7 +65,8 @@ namespace ChallengeMasGlobalConsulting.Controllers
             Error error;
             try
             {
-                var result = await this._employeeBll.GetEmployeeById(id);
+                int idInt = Convert.ToInt32(id);
+                var result = await this._employeeBll.GetEmployeeById(idInt);
                 resultDto.Succedded = true;
                 resultDto.obj = result;
                 return Ok(resultDto);
@@ -88,8 +89,5 @@ namespace ChallengeMasGlobalConsulting.Controllers
                 return BadRequest(resultDto);
             }
         }
-
-
-
     }
 }

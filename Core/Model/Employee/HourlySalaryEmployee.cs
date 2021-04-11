@@ -11,9 +11,9 @@ namespace Core.Model.Employee
         {
         }
 
-        protected override double GetSalary()
+        protected override void SetCalculatedAnnualSalary()
         {
-            throw new NotImplementedException();
+            this.CalculatedAnnualSalary = 120 * HourlySalary * 12;
         }
     }
 }
