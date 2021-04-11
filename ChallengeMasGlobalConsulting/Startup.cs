@@ -41,6 +41,10 @@ namespace ChallengeMasGlobalConsulting
             services.AddTransient<IEmployeeDal, EmployeeDal>();
             services.AddTransient<HttpClient, HttpClient>();
             services.AddTransient<IEmployeeFactory, EmployeeFactory>();
+           
+            services.AddSingleton((Serilog.ILogger)new LoggerConfiguration()
+                     .WriteTo.Console()
+                     .CreateLogger());
 
             services.AddSwaggerGen(c =>
             {

@@ -9,7 +9,7 @@ namespace ChallengeMasGlobalConsulting.Bll.Contracts
 {
     public interface IEmployeeBll
     {
-        Task<ICollection<Core.Model.Employee.Employee>> GetAllEmployees();
-        Task<Core.Model.Employee.Employee> GetEmployeeById(int id);
+        Task<ICollection<Core.Model.Employee.Employee>> GetAllEmployeesAsync();
+        Task<Core.Model.Employee.Employee> GetEmployeeByIdAsync(int id);
     }
 }

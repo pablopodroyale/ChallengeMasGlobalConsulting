@@ -20,31 +20,37 @@ namespace ChallengeMasGlobalConsulting.Bll
         private readonly ILogger _log;
         private readonly IEmployeeFactory _employeeFactory;
 
-        public EmployeeBll(IEmployeeDal employeeDal, IEmployeeFactory employeeFactory)
+        public EmployeeBll(IEmployeeDal employeeDal, IEmployeeFactory employeeFactory, ILogger log)
         {
             this.employeeDal = employeeDal;
-            _log = Log.ForContext<EmployeeBll>();
+            _log = log;
             this._employeeFactory = employeeFactory;
         }
-        public async Task<ICollection<Core.Model.Employee.Employee>> GetAllEmployees()
+        public async Task<ICollection<Core.Model.Employee.Employee>> GetAllEmployeesAsync()
         {
             List<Error> errors = new List<Error>();
             ICollection<Core.Model.Employee.Employee> ret = new List<Core.Model.Employee.Employee>();
             Core.Model.Employee.Employee employee = null;
             CustomException customException = null;
-            string strError = null;
 
             try
             {
-                var res = await this.employeeDal.Get();
+                var res = await this.employeeDal.GetAsync();
                 if (res != null)
                 {
                     if (res.Status == 200)
                     {
                         foreach (var item in res.Content)
                         {
-                            employee = this._employeeFactory.GetEmployee(item);
-                            ret.Add(employee);
+                            try
+                            {
+                                employee = this._employeeFactory.GetEmployee(item);
+                                ret.Add(employee);
+                            }
+                            catch (EmployeeNotSupportedException ex)
+                            {
+                                this._log.Error(ex.Message);
+                            }
                         }
                     }
                     else
@@ -69,16 +75,15 @@ namespace ChallengeMasGlobalConsulting.Bll
             }
         }
 
-        public async Task<Core.Model.Employee.Employee> GetEmployeeById(int id)
+        public async Task<Core.Model.Employee.Employee> GetEmployeeByIdAsync(int id)
         {
             List<Error> errors = new List<Error>();
             Core.Model.Employee.Employee ret = null;
             CustomException customException = null;
-            string strError = null;
 
             try
             {
-                var res = await this.employeeDal.Get();
+                var res = await this.employeeDal.GetAsync();
                 if (res != null)
                 {
                     if (res.Status == 200)

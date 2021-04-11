@@ -8,6 +8,6 @@ namespace ChallengeMasGlobalConsulting.Dal.Contracts
 {
     public interface IEmployeeDal 
     {
-        Task<ResponseDto<ICollection<EmployeeResponseDto>>> Get();
+        Task<ResponseDto<ICollection<EmployeeResponseDto>>> GetAsync();
     }
 }

@@ -10,6 +10,8 @@ namespace Core.Common.Enum
         [Description("Error, fetching employees")]
         ERROR_GET_EMPLOYEES,
         [Description("Error employee {0} not found")]
-        ERROR_EMPLOYEE_NOT_FOUND
+        ERROR_EMPLOYEE_NOT_FOUND,
+        [Description("Error employee type not supported")]
+        ERROR_EMPLOYEE_NOT_SUPPORTED
     }
 }

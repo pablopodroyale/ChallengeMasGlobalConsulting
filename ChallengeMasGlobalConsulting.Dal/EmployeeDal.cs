@@ -27,7 +27,7 @@ namespace ChallengeMasGlobalConsulting.Dal
             disposed = false;
         }
 
-        public async Task<ResponseDto<ICollection<EmployeeResponseDto>>> Get()
+        public async Task<ResponseDto<ICollection<EmployeeResponseDto>>> GetAsync()
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
             var response = await _httpClient.GetAsync("employees");

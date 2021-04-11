@@ -17,10 +17,10 @@ namespace ChallengeMasGlobalConsulting.Controllers
     {
         private readonly IEmployeeBll _employeeBll;
         private readonly ILogger _log;
-        public EmployeeController(IEmployeeBll employeeBll)
+        public EmployeeController(IEmployeeBll employeeBll, ILogger log)
         {
             this._employeeBll = employeeBll;
-            _log = Log.ForContext<EmployeeController>();
+            _log = log;
         }
 
         [HttpGet("")]
@@ -32,7 +32,7 @@ namespace ChallengeMasGlobalConsulting.Controllers
             Error error;
             try
             {
-                var result = await this._employeeBll.GetAllEmployees();
+                var result = await this._employeeBll.GetAllEmployeesAsync();
                 resultDto.Succedded = true;
                 resultDto.obj = result.ToList();
                 return Ok(resultDto);
@@ -66,7 +66,7 @@ namespace ChallengeMasGlobalConsulting.Controllers
             try
             {
                 int idInt = Convert.ToInt32(id);
-                var result = await this._employeeBll.GetEmployeeById(idInt);
+                var result = await this._employeeBll.GetEmployeeByIdAsync(idInt);
                 resultDto.Succedded = true;
                 resultDto.obj = result;
                 return Ok(resultDto);
