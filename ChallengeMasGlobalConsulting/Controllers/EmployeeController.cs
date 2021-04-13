@@ -1,5 +1,7 @@
 ﻿using ChallengeMasGlobalConsulting.Bll.Contracts;
 using Core.Common.Exception;
+using Core.Dto;
+using Core.Dto.Employee;
 using Core.Dto.Response;
 using Core.Model.Employee;
 using Microsoft.AspNetCore.Mvc;
@@ -23,16 +25,14 @@ namespace ChallengeMasGlobalConsulting.Controllers
             _log = log;
         }
 
-        [HttpGet("")]
-        public async Task<ActionResult<ServiceResultDto<ICollection<Employee>>>> GetAllEmployees()
+        [HttpPost("")]
+        public async Task<ActionResult<ServiceResultDto<ICollection<Employee>>>> GetAllEmployees([FromBody]SearchDto searchDto)
         {
             _log.Information("Calling GetAllEmployees");
             ServiceResultDto<ICollection<Employee>> resultDto = new ServiceResultDto<ICollection<Employee>>();
-            List<Error> errors;
-            Error error;
             try
             {
-                var result = await this._employeeBll.GetAllEmployeesAsync();
+                var result = await this._employeeBll.GetAllEmployeesAsync(searchDto);
                 resultDto.Succedded = true;
                 resultDto.obj = result.ToList();
                 return Ok(resultDto);
@@ -44,16 +44,6 @@ namespace ChallengeMasGlobalConsulting.Controllers
                 resultDto.Succedded = false;
                 return Ok(resultDto);
             }
-            catch (Exception e)
-            {
-                _log.Error("Error Details: {0}", e);
-                errors = new List<Error>();
-                error = new Error(e);
-                errors.Add(error);
-                resultDto.Succedded = false;
-                resultDto.Errors = errors;
-                return BadRequest(resultDto);
-            }
         }
 
         [HttpGet("{id}")]
@@ -61,8 +51,7 @@ namespace ChallengeMasGlobalConsulting.Controllers
         {
             _log.Information("Calling Get GetEmployeeById Id:", id);
             ServiceResultDto<Employee> resultDto = new ServiceResultDto<Employee>();
-            List<Error> errors;
-            Error error;
+           
             try
             {
                 int idInt = Convert.ToInt32(id);
@@ -77,16 +66,6 @@ namespace ChallengeMasGlobalConsulting.Controllers
                 resultDto.Errors = e.Errors.ToList();
                 resultDto.Succedded = false;
                 return Ok(resultDto);
-            }
-            catch (Exception e)
-            {
-                _log.Error("Error Details: {0}", e);
-                errors = new List<Error>();
-                error = new Error(e);
-                errors.Add(error);
-                resultDto.Succedded = false;
-                resultDto.Errors = errors;
-                return BadRequest(resultDto);
             }
         }
     }

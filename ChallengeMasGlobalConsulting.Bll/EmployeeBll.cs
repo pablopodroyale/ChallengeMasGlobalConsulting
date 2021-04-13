@@ -4,6 +4,8 @@ using ChallengeMasGlobalConsulting.Dal.Contracts;
 using Core.Common.Enum;
 using Core.Common.Exception;
 using Core.Common.Helper;
+using Core.Dto;
+using Core.Dto.Employee;
 using Core.Model.Employee;
 using Serilog;
 using System;
@@ -26,7 +28,7 @@ namespace ChallengeMasGlobalConsulting.Bll
             _log = log;
             this._employeeFactory = employeeFactory;
         }
-        public async Task<ICollection<Core.Model.Employee.Employee>> GetAllEmployeesAsync()
+        public async Task<ICollection<Core.Model.Employee.Employee>> GetAllEmployeesAsync(SearchDto searchDto)
         {
             List<Error> errors = new List<Error>();
             ICollection<Core.Model.Employee.Employee> ret = new List<Core.Model.Employee.Employee>();
@@ -40,6 +42,11 @@ namespace ChallengeMasGlobalConsulting.Bll
                 {
                     if (res.Status == 200)
                     {
+                        if (searchDto != null && searchDto.Id != null)
+                        {
+                            res.Content = res.Content.Where(x => x.id == searchDto.Id.GetValueOrDefault()).ToList();
+                        }
+
                         foreach (var item in res.Content)
                         {
                             try
@@ -97,7 +104,7 @@ namespace ChallengeMasGlobalConsulting.Bll
                         {
                             throw catchError(errors, ref customException, string.Format(Errors.ERROR_EMPLOYEE_NOT_FOUND.GetDescription(), id));
                         }
-                       
+
                     }
                     else
                     {

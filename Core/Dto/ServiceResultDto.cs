@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Core.Dto.Response
+namespace Core.Dto
 {
     public class ServiceResultDto<T>
     {
